@@ -1,0 +1,64 @@
+ELB:
+=====
+1) The purpose of ELB is to distribute the incoming load between multiple EC2 instance.
+2) By using ELB we can achieve high availability of application.
+3) If one EC2 instance goes down, other EC2 instances will handle the incoming requests.
+4) ELB is region level service.
+5) ELB always send incoming requests to healthy EC2 instances only.
+6) Whenever we create ELB it will generate DNS name.
+7) ELB contains port number & security group.
+8) Internally ELB is an EC2 instance.
+9) ELB send request different AZ's EC2 instance within the region.
+
+ELB Configurations:
+=========================
+a) ELB Port : Client(Browser) send the request to ELB, ELB forward that request to the EC2 application port.
+b) Instance Port: Where your application/webserver is running inside EC2 instance.
+ex: Apache2 --- 80
+    Tomcat -- 8080
+    Weblogic --- 8888
+c) ELB SG: ELB also contains SG, In ELB SG we need to allow ELB port inbound request.
+
+
+Client ----> ELB ----> EC2
+                 ----> EC2
+                 ----> EC2
+
+Practice ELB:
+================
+Req:
+a) Application is running on 2 Tomcat servers
+b) Do the load balancing between both the servers
+c) Both the instances in Mumbai Region
+   a) One instance is running on ap-south-1a AZ
+   b) Other instance is running on ap-south-1b AZ
+
+Step1:
+a) Launch 2 Ubuntu EC2 instances in different AZs
+b) Login into both the instances and run below commands to install Tomcat8
+   sudo apt-get update
+   sudo apt-get install tomcat8
+   service tomcat8 status
+c) Add "8080" port in EC2 instance SG Inbound rules
+d) Create ELB
+   i) Goto the EC2 instance dashboard
+   ii) Goto the Load Balancer section
+   iii) Click on Load Balancers
+   iv) Click on "Create Load Balancer"
+   v) Click on "Classic Load Balancer" create button.
+   vi) Give any name to the Load Balancer.
+   vii) Configure "Load Balancer port" and "Instance port"
+
+         In "Load Balancer port" give the value 80
+         In "Instance port" give the value 8080
+
+viii) Click on "Next"
+ix) Select "Create a new SG"
+x) Click on  --> Next --> Next --> Next
+xi) Select both EC2 instances
+xii) Click on "Next"
+xiii) Click on "Review and Create" --> Create
+xiv) Copy the DNS Name and paste it into browser.
+
+
+

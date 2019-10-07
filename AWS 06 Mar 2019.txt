@@ -1,0 +1,34 @@
+1) Create EC2 instance
+2) Install any webserver
+3) Create Load Balancer
+4) Attach EC2 instance to ELB
+
+1)ELB Purpose:
+Distribute the load between multiple EC2 instances.
+To achieve HA
+
+2)ELB's are region level service.
+3)ELB -- SG, Port(ELB port)
+4)Instance Port
+5) Out of Service
+
+Client --> ELB ---> EC2
+               ---> EC2
+
+ELB Port -- Front End port
+Instance port
+
+cd /var/www/html
+/var/www/html$ ls
+cd /var
+ls
+index.html
+
+
+Config --- /etc/
+Log --- /var
+
+Security grp of ELB
+ELB Port number
+Instance port number
+
